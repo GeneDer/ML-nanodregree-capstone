@@ -1,0 +1,14 @@
+process:
+
+- search for possible methods to solve the problem. One being doing more research on the faster R-CNN. Another being simply train 2 models, one for detecting the possible region for the digit with edgebox or selective search, second for classification for the digit with CNN.
+
+- downloaded data and coded a matlab code to convert .mat into txt for python usage later.
+
+- reading paper and possibly clean data into a better format.
+
+- current options: selective search + cnn to classifiy 
+		    directly use faster rcnn from the paper
+		    cnn for number of numbers + localization cnn
+		    use other people's imlementation of RoI layer to make faster rcnn
+			
+- attempt to train number of numbers, locations of the boxes, and the class of each number. Prepare to saparate images into different lengths to train the first model.
