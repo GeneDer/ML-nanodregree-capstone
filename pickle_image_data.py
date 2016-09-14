@@ -56,8 +56,8 @@ def load_image(folder):
   dataset = np.ndarray(shape=(min(len(image_files), maximum_size), image_size, image_size),
                          dtype=np.float32)
   image_index = 0
-  for image in os.listdir(folder):
-    image_file = os.path.join(folder, image)
+  for i in xrange(1,len(os.listdir(folder))):
+    image_file = os.path.join(folder, str(i)+'.png')
     try:
       image_data = ndimage.imread(image_file, flatten = True)
       image_data_resized = misc.imresize(image_data, (image_size, image_size))
@@ -92,6 +92,6 @@ def pickle_images(folder):
     
   return dataset_names
 
-train_datasets = pickle_images('train')
 test_datasets = pickle_images('test')
+train_datasets = pickle_images('train')
 extra_datasets = pickle_images('extra')

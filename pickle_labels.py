@@ -7,27 +7,36 @@ def load_labels(folder):
   print folder
   maximum_size = 100000
   image_files = os.listdir(folder)
-  labels = np.ndarray(shape=(min(len(image_files), maximum_size), 1),
-                      dtype=np.int32)
-  numbers = {}
+  labels = {'length':np.ndarray(shape=(min(len(image_files), maximum_size), 1),
+                                dtype=np.int32),
+            'bbox':[], 'number':[]}
+
   count_line = 0
   with open(folder+'/'+folder+'.txt', 'r') as f:
     for line in f:
-      parse_line = line.split(':')
-      number = ''
-      for i in xrange(1,len(parse_line)):
-        n = parse_line[i].split(',')[0]
-        if n != '10':
-          number += n
+      parse_line = line.replace('\n', '').split(':')
+      number = []
+      bbox = []
+      for i in xrange(1, len(parse_line)):
+        element_split = map(int, parse_line[i].split(','))
+        if element_split[0] != 10:
+          number.append(element_split[0])
         else:
-          number += '0'
-      labels[count_line] = int(number)
+          number.append(0)
+        bbox.append(element_split[1:5])
+                        
+      labels['length'][count_line] = len(parse_line) - 1
+      labels['bbox'].append(bbox)
+      labels['number'].append(number)
+      
       count_line += 1
       if count_line >= maximum_size:
         break
       
-  labels = labels[0:count_line, :]
-  print('Full dataset tensor:', labels.shape)
+  labels['length'] = labels['length'][0:count_line, :]
+  print 'length shape:', labels['length'].shape
+  print 'bbox shape:', len(labels['bbox'])
+  print 'number shape:', len(labels['number'])
   return labels
 
         
