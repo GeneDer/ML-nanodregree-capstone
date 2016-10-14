@@ -44,13 +44,13 @@ dateset. You can replace the data with your own dataset.
 1. Download and extract [train.tar.gz](http://ufldl.stanford.edu/housenumbers/train.tar.gz), 
 and [test.tar.gz](http://ufldl.stanford.edu/housenumbers/test.tar.gz) into the root
 of this repository.
-2. If you have Matlab installed on your computer, you can dump `mat_to_txt.m` into 
+2. If you have Matlab installed on your computer, you can copy `mat_to_txt.m` into 
 `train` and `test` directory to convert `digitStruct.mat` to txt file.
 3. You can also get my generated verson from [train](https://www.dropbox.com/s/jmmb9jzaiqr9dhp/train.txt?dl=1)
-and [test](https://www.dropbox.com/s/8394po4yqmbi2s6/test.txt?dl=1). Dump each txt into their corresponding
+and [test](https://www.dropbox.com/s/8394po4yqmbi2s6/test.txt?dl=1). Move each txt into their corresponding
 folder. If you are interested in training on bigger set, I also have 
 [extra](https://www.dropbox.com/s/kx600daed60v2no/extra.txt?dl=1) available.
-4. Run `overfeat_data_processing.py` in `SVHN` folder. It will automaticlly generate
+4. Run `overfeat_data_processing.py` in the `SVHN` folder of this repository. It will automaticlly generate
 resized images, .idl, and .json for [TensorBox](https://github.com/Russell91/TensorBox)
 to train on.
 5. Copy `overfeat_rezoom.json` from the root of this repository into TensorBox's 
@@ -61,15 +61,16 @@ automaticlly generate the pickle files of image data and labels for our
 classification networks.
 
 ### Training and Perpare for Evaluation
-1. Region proporal will be trained using [TensorBox](https://github.com/Russell91/TensorBox).
+1. Region proposal will be trained using [TensorBox](https://github.com/Russell91/TensorBox).
 Please refer to TensorBox for more detail. 
 2. After TensorBox is trained, rename the .ckpt file with `overfeat_checkpint.ckpt`
-and dump it into `data` folder.
-3. Run `classification_networks.py` to train the classification networks.
+and copy it into the `data` folder of this repository.
+3. Run `classification_networks.py` in this repository to train the classification 
+networks.
 4. The check point file will be stored in `/tmp` folder. Rename the .ckpt file
-with `classification_model.ckpt` and dump it into `data` folder.
-5. If you don't alreayd have `googlenet.pb` in the `data` folder, download it from
-[here](http://russellsstewart.com/s/tensorbox/googlenet.pb).
+with `classification_model.ckpt` and copy it into the `data` folder in this repository.
+5. If you don't already have `googlenet.pb` in the `data` folder of this repository, 
+download it from [here](http://russellsstewart.com/s/tensorbox/googlenet.pb).
 6. After all files are trained and in place, run `python evaluation.py` to evluate
 all images in `images_input` folder or `python evaluation.py <image.jpg>` for a 
 specific image. Results will be shown in `images_output` folder.
